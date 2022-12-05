@@ -1,0 +1,11 @@
+{
+  ".json": "application/json",
+  ".ico": "image/x-icon",
+  ".html": "text/html",
+  ".png": "image/png",
+  ".txt": "text/plain",
+  ".css": "text/css",
+  ".map": "binary/octet-stream",
+  ".js": "application/javascript",
+  ".svg": "image/svg+xml"
+}
