@@ -32,3 +32,8 @@ variable "lambdaName" {
   default = "get-dynamic-content-lambda"
   type = string
 }
+
+variable "cloudfront-custom-header-key-value" {
+  default = "74c829fc-4afd-435d-b7b3-5b26dc0f409f"
+  type = string
+}

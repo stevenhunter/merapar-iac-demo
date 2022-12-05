@@ -16,6 +16,10 @@ resource "aws_cloudfront_distribution" "webapp_distribution" {
   	domain_name = replace(aws_api_gateway_deployment.api-deployment.invoke_url, "/^https?://([^/]*).*/", "$1")
   	origin_id   = var.apiGatewayOriginId
 	  origin_path = "/${var.apiStageName}"
+    custom_header {
+      name = "x-api-key"
+      value = var.cloudfront-custom-header-key-value
+    }
 
     custom_origin_config {
       http_port              = 80
@@ -27,7 +31,6 @@ resource "aws_cloudfront_distribution" "webapp_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  #comment             = "webapp-cloudfront"
   default_root_object = "index.html"
     
   default_cache_behavior {

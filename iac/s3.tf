@@ -14,6 +14,15 @@ resource "aws_s3_bucket_ownership_controls" "web-bucket-ownership" {
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "webapp-bucket-public-access-block" {
+  bucket = aws_s3_bucket.webapp-bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 resource "aws_s3_bucket_website_configuration" "webapp-bucket-wesbite-config" {
   bucket = aws_s3_bucket.webapp-bucket.id
   index_document {
