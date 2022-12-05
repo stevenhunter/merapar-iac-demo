@@ -1,5 +1,5 @@
 locals {
-  mime_types = jsondecode(file("mime.json"))
+  mime_types         = jsondecode(file("mime.json"))
   web_app_build_path = "../web-app/build/"
 }
 
@@ -48,10 +48,10 @@ resource "aws_s3_bucket_policy" "webapp-bucket-policy" {
 }
 
 resource "aws_s3_object" "webapp-bucket-s3-objects" {
-  for_each = fileset(local.web_app_build_path, "**")
-  bucket = aws_s3_bucket.webapp-bucket.id
-  key = each.value
-  source = "${local.web_app_build_path}${each.value}"
-  etag = filemd5("${local.web_app_build_path}${each.value}")
+  for_each     = fileset(local.web_app_build_path, "**")
+  bucket       = aws_s3_bucket.webapp-bucket.id
+  key          = each.value
+  source       = "${local.web_app_build_path}${each.value}"
+  etag         = filemd5("${local.web_app_build_path}${each.value}")
   content_type = lookup(local.mime_types, regex("\\.[^.]+$", "${local.web_app_build_path}${each.value}"), null)
 }

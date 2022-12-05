@@ -13,11 +13,11 @@ resource "aws_cloudfront_distribution" "webapp_distribution" {
   }
 
   origin {
-  	domain_name = replace(aws_api_gateway_deployment.api-deployment.invoke_url, "/^https?://([^/]*).*/", "$1")
-  	origin_id   = var.apiGatewayOriginId
-	  origin_path = "/${var.apiStageName}"
+    domain_name = replace(aws_api_gateway_deployment.api-deployment.invoke_url, "/^https?://([^/]*).*/", "$1")
+    origin_id   = var.apiGatewayOriginId
+    origin_path = "/${var.apiStageName}"
     custom_header {
-      name = "x-api-key"
+      name  = "x-api-key"
       value = var.cloudfront-custom-header-key-value
     }
 
@@ -32,7 +32,7 @@ resource "aws_cloudfront_distribution" "webapp_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-    
+
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
@@ -63,7 +63,7 @@ resource "aws_cloudfront_distribution" "webapp_distribution" {
         forward = "none"
       }
     }
-	  viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "allow-all"
     min_ttl                = 0
     default_ttl            = 15
     max_ttl                = 86400
